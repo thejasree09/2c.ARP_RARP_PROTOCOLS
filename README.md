@@ -19,8 +19,7 @@ stored.
 P
 ## PROGRAM - ARP
 ```
-Developed by: RIYA P L
-Reg no: 212223240141
+
 import socket 
 s=socket.socket() 
 s.bind(('localhost',8000)) 
