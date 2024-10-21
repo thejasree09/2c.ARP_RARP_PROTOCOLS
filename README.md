@@ -1,5 +1,4 @@
 # 2c.SIMULATING ARP /RARP PROTOCOLS
-## Date: 
 ## AIM
 To write a python program for simulating ARP protocols using TCP.
 ## ALGORITHM:
@@ -19,35 +18,73 @@ stored.
 P
 ## PROGRAM - ARP
 ```
+Client
 
-import socket 
+socket 
 s=socket.socket() 
 s.bind(('localhost',8000)) 
 s.listen(5) 
 c,addr=s.accept() 
 address={"165.165.80.80":"6A:08:AA:C2","165.165.79.1":"8A:BC:E3:FA"}; 
-while True: 
+while True:
             ip=c.recv(1024).decode() 
             try: 
                 c.send(address[ip].encode()) 
             except KeyError: 
-                c.send("Not Found".encode()) 
+                c.send("Not Found".encode())
 ```
-## OUPUT - ARP
-![Screenshot 2024-09-10 083626](https://github.com/user-attachments/assets/abb108c8-b1aa-4cb3-a17f-066e916d4e29)
 
-## PROGRAM - RARP
 ```
+Server
+
 import socket 
 s=socket.socket() 
 s.connect(('localhost',8000)) 
 while True: 
- ip=input("Enter logical Address : ") 
- s.send(ip.encode()) 
- print("MAC Address",s.recv(1024).decode()) 
+     ip=input("Enter logical Address : ") 
+     s.send(ip.encode()) 
+     print("MAC Address",s.recv(1024).decode())
+ ```
+## OUPUT - ARP
+
+![WhatsApp Image 2024-10-08 at 08 18 22_b00f4d16](https://github.com/user-attachments/assets/9b3c81f6-aac9-41d9-8c4f-be532af0ce41)
+
+![WhatsApp Image 2024-10-08 at 08 18 22_2ac0dca3](https://github.com/user-attachments/assets/6b1b2a57-9fe7-4e53-84b6-194d1be584cf)
+## PROGRAM - RARP
 ```
+Client
+
+import socket
+s=socket.socket()
+s.bind(('localhost',9000))
+s.listen(5)
+c,addr=s.accept()
+address={"6A:08:AA:C2":"192.168.1.100","8A:BC:E3:FA":"192.168.1.99"};
+while True:
+ ip=c.recv(1024).decode()
+ try:
+  c.send(address[ip].encode())
+ except KeyError:
+  c.send("Not Found".encode())
+```
+```
+Server
+
+import socket
+s=socket.socket()
+s.connect(('localhost',9000))
+while True:
+ ip=input("Enter MAC Address : ")
+ s.send(ip.encode())
+ print("Logical Address",s.recv(1024).decode())
+```
+
 ## OUPUT -RARP
-![Screenshot 2024-09-10 083633](https://github.com/user-attachments/assets/2bcfde1b-9896-4a01-9c5a-384e6134ddce)
+
+![WhatsApp Image 2024-10-08 at 08 18 23_ea279d6c](https://github.com/user-attachments/assets/f6ab4401-b516-4025-b556-6f1640ddb115)
+
+
+![WhatsApp Image 2024-10-08 at 08 18 24_63b9af28](https://github.com/user-attachments/assets/61c517e9-27fd-4348-8308-494b73ff262f)
 
 ## RESULT
 Thus, the python program for simulating ARP protocols using TCP was successfully 
